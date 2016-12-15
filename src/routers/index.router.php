@@ -4,7 +4,6 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
     //Hello Word
     $app->get('/', function (Request $request, Response $response) {
-        //$this->logger->addInfo("Something interesting happened");
         $oStuff = new models\Starter();
         $hello = $oStuff->setHello();
 
@@ -12,6 +11,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
             "hello" => $hello['hello'],
             "description1" => $hello['description1'],
             "description2" => $hello['description2'],
-            "author" => $hello['author']]);
+            "author" => $hello['author'],
+            "router" => $this->router]);
         return $response;
     })->setName("/");

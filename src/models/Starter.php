@@ -18,7 +18,7 @@ class Starter {
 	public function getAll() {
 		$r = array();		
 
-		$sql = "SELECT * FROM user";
+		$sql = "SELECT * FROM user a order by a.created;";
 		$stmt = $this->db->prepare($sql);		
 
 		if ($stmt->execute()) {	
@@ -41,7 +41,7 @@ class Starter {
 			'hello' => "Hello World!!!",
 			'description1' => "Use this document as a way to quickly start any new project.",
 			'description2' => "All you get is this text and a mostly barebones HTML document.",
-			'author' => "iSlim is forged by M ABD AZIZ ALFIAN"
+			'author' => "iSlim3 is forged by M ABD AZIZ ALFIAN"
 			);
     }
 }

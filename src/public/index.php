@@ -1,36 +1,75 @@
 <?php
+/**
+ * iSlim3 is based on Slim Framework (http://slimframework.com)
+ *
+ * @link      https://github.com/aalfiann/iSlim3
+ * @copyright Copyright (c) 2016 M ABD AZIZ ALFIAN
+ * @license   https://github.com/iSlim3/license.md (MIT License)
+ */
 
-//Load all class libraries
+// Load all class libraries
 require '../vendor/autoload.php';
+// Load config
+require '../config.php';
 
+// Create container
+$app = new \Slim\App(["settings" => $config]);
+$container = $app->getContainer();
+
+// Load all classes
 $classes = glob('../classes/*.php');
 foreach ($classes as $class) {
     require $class;
 }
 
-//Create config
-$config['displayErrorDetails'] = true;
-$config['addContentLengthHeader'] = false;
-
-$config['db']['host']   = "localhost";
-$config['db']['user']   = "root";
-$config['db']['pass']   = "root";
-$config['db']['dbname'] = "javelinee";
-
-//Read config
-$app = new \Slim\App(["settings" => $config]);
-$container = $app->getContainer();
-
+// Load all models
 $models = glob('../models/*.php');
 foreach ($models as $model) {
     require $model;
 }
 
-//load templates
-$container['viewbackend'] = new \Slim\Views\PhpRenderer("../templates/default/backend");
-$container['viewfrontend'] = new \Slim\Views\PhpRenderer("../templates/default/frontend");
+// Register component templates on container
+if (strtolower($config['templateRender']) == "php")
+{
+    $container['viewbackend'] = new \Slim\Views\PhpRenderer('../templates/'.$container['settings']['theme'].'/backend');
+    $container['viewfrontend'] = new \Slim\Views\PhpRenderer('../templates/'.$container['settings']['theme'].'/frontend');
+}
+else
+{
+    $container['viewbackend'] = function ($container) {
+        if ($container['settings']['twigcache'] == true){
+            $options = ['cache' => 'cache'];
+        } else {
+            $options = [];
+        }
+        
+        $viewbackend = new \Slim\Views\Twig('../templates/'.$container['settings']['theme'].'/backend', $options);
+    
+        // Instantiate and add Slim specific extension
+        $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
+        $viewbackend->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
 
-//Run Monolog
+        return $viewbackend;
+    };
+
+    $container['viewfrontend'] = function ($container) {
+        if ($container['settings']['twigcache'] == true){
+            $options = ['cache' => 'cache'];
+        } else {
+            $options = [];
+        }
+        $viewfrontend = new \Slim\Views\Twig('../templates/'.$container['settings']['theme'].'/frontend', $options);
+    
+        // Instantiate and add Slim specific extension
+        $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
+        $viewfrontend->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
+
+        return $viewfrontend;
+    };
+}
+
+
+// Register component Monolog
 $container['logger'] = function($c) {
     $logger = new \Monolog\Logger('my_logger');
     $file_handler = new \Monolog\Handler\StreamHandler("../logs/app.log");
@@ -38,7 +77,7 @@ $container['logger'] = function($c) {
     return $logger;
 };
 
-//Build database connection container
+// Register component database connection on container
 $container['db'] = function ($c) {
     $db = $c['settings']['db'];
     $pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'],
@@ -48,7 +87,25 @@ $container['db'] = function ($c) {
     return $pdo;
 };
 
-// Automatically load router files
+// Override the default Not Found Handler
+$container['notFoundHandler'] = function ($container) {
+    return function ($request, $response) use ($container) {
+        return $response->withRedirect($container['settings']['baseuri'].'/404');
+    };
+};
+
+// Override the default Not Allowed Handler
+$container['notAllowedHandler'] = function ($container) {
+    return function ($request, $response, $methods) use ($container) {
+        return $container['response']
+            ->withStatus(405)
+            ->withHeader('Allow', implode(', ', $methods))
+            ->withHeader('Content-type', 'text/html')
+            ->write('Method must be one of: ' . implode(', ', $methods));
+    };
+};
+
+// Load all router files before run
 $routers = glob('../routers/*.router.php');
 foreach ($routers as $router) {
     require $router;
