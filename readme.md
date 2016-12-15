@@ -29,6 +29,19 @@ Folder System
 
 Here is the place for your application classes
 
+### logs/
+
+Here is the place your custom log.
+You can add your custom log in your any container or router.
+
+Example adding custom log in router post
+```php
+$app->post('/user/new', function (Request $request, Response $response) {
+    echo 'This is a POST route';
+    $this->logger->addInfo("Response post is succesfully complete!!!");
+});
+```
+
 ### models/
 
 Add the model classes here.
@@ -109,7 +122,6 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
     //Hello Word
     $app->get('/', function (Request $request, Response $response) {
-        //$this->logger->addInfo("Something interesting happened");
         $oStuff = new models\Starter();
         $hello = $oStuff->setHello();
 
