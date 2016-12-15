@@ -145,6 +145,7 @@ There are already 2 default themes in iSlim3:
 * defaultPHP (using render PHP)
 
 iSlim3 have two type of templates:
+
 1. Render as PHP
 2. Use Twig
 
