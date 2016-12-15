@@ -10,10 +10,6 @@ iSlim version 3 is the easiest and flexible way to create your PHP application u
 which is look alike MVC pattern and Bootstrap 4.
 
 
-Status Development : Stable 
----------------
-
-
 Getting Started
 ---------------
 1. Get or download the project
