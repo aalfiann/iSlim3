@@ -21,9 +21,9 @@ $config['addContentLengthHeader']   = false;
  *
  * Note: if You choose theme defaultPHP, make sure you have set templateRender to 'php'
  */
-$config['templateRender']           = 'php';
+$config['templateRender']           = 'twig';
 $config['twigcache']                = false;
-$config['theme']                    = 'defaultPHP';
+$config['theme']                    = 'default';
 
 /** 
  * Configuration PDO MySQL Database
