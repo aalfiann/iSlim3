@@ -1,6 +1,6 @@
 iSlim3
 =======
-[![Build Status](https://travis-ci.org/aalfiann/Slim.svg?branch=develop)](https://travis-ci.org/slimphp/Slim)
+[![Travis branch](https://img.shields.io/travis/rust-lang/rust/master.svg)](https://github.com/aalfiann/iSlim3)
 [![Coverage Status](https://coveralls.io/repos/slimphp/Slim/badge.svg)](https://coveralls.io/r/slimphp/Slim)
 [![Total Downloads](https://poser.pugx.org/slim/slim/downloads)](https://packagist.org/packages/slim/slim)
 [![License](https://poser.pugx.org/slim/slim/license)](https://packagist.org/packages/slim/slim)
