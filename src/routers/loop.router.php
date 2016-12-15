@@ -7,9 +7,9 @@ use \Psr\Http\Message\ResponseInterface as Response;
         $oStuff = new models\Starter($this->db);
         $results = $oStuff->getAll();
         if ($results != 0){
-            $response = $this->viewfrontend->render($response,'loop.html', array('items' => $results));
+            $response = $this->viewfrontend->render($response,'loop.html', ['items' => $results, 'router' => $this->router]);
         } else {
-            $response = $this->viewfrontend->render($response,'loop.html', array('items' => 'no records found!'));
+            $response = $this->viewfrontend->render($response,'loop.html', ['items' => 'no records found!', 'router' => $this->router]);
         }
         return $response;
     });
