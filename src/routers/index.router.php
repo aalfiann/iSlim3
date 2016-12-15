@@ -4,7 +4,6 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
     //Hello Word
     $app->get('/', function (Request $request, Response $response) {
-        //$this->logger->addInfo("Something interesting happened");
         $oStuff = new models\Starter();
         $hello = $oStuff->setHello();
 

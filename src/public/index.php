@@ -1,4 +1,11 @@
 <?php
+/**
+ * iSlim3 is based on Slim Framework (http://slimframework.com)
+ *
+ * @link      https://github.com/aalfiann/iSlim3
+ * @copyright Copyright (c) 2016 M ABD AZIZ ALFIAN
+ * @license   https://github.com/iSlim3/license.md (MIT License)
+ */
 
 // Load all class libraries
 require '../vendor/autoload.php';

@@ -1,5 +1,9 @@
 iSlim3
 =======
+[![Build Status](https://travis-ci.org/slimphp/Slim.svg?branch=stable)](https://travis-ci.org/slimphp/Slim)
+[![Coverage Status](https://coveralls.io/repos/slimphp/Slim/badge.svg)](https://coveralls.io/r/slimphp/Slim)
+[![Total Downloads](https://poser.pugx.org/slim/slim/downloads)](https://packagist.org/packages/slim/slim)
+[![License](https://poser.pugx.org/slim/slim/license)](https://packagist.org/packages/slim/slim)
 
 I call this "iSlim" because I heart [Slim Framework](http://www.slimframework.com/).<br>
 iSlim version 3 is the easiest and flexible way to create your PHP application using PSR 7 way,<br>
@@ -34,7 +38,7 @@ Here is the place for your application classes
 Here is the place your custom log.
 You can add your custom log in your any container or router.
 
-Example adding custom log in router post
+Example adding custom log in a router post
 ```php
 $app->post('/user/new', function (Request $request, Response $response) {
     echo 'This is a POST route';
