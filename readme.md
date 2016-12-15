@@ -104,8 +104,8 @@ class Starter {
 ### public/
 
 All the public files:
-* Images, CSS and JS files
-* index.php
+* Images, CSS and JS files which is inside a theme folder.
+* index.php (this is required to run the core of Slim Framework)
 
 ### routers/
 
