@@ -3,12 +3,10 @@
 /** 
  * Configuration App
  *
- * @var $config['baseuri'] is only used on slim core for base uri. This was used for override handler not found page
  * @var $config['displayErrorDetails'] to display error details on slim
  * @var $config['addContentLengthHeader'] to set the Content-Length header which makes Slim behave more predictably
  * 
  */
-$config['baseuri']                  = 'http://localhost:1337/iSlim3/src/public';
 $config['displayErrorDetails']      = true;
 $config['addContentLengthHeader']   = false;
 

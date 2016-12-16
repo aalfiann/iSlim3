@@ -90,7 +90,7 @@ $container['db'] = function ($c) {
 // Override the default Not Found Handler
 $container['notFoundHandler'] = function ($container) {
     return function ($request, $response) use ($container) {
-        return $response->withRedirect($container['settings']['baseuri'].'/404');
+        return $response->withRedirect($container['request']->getUri()->getBasePath().'/404');
     };
 };
 
