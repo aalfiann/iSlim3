@@ -45,15 +45,13 @@ $app->post('/user/new', function (Request $request, Response $response) {
 Add the model classes here.
 We are using PDO MySQL for the Database.
 
-Example of class:
+Example of models class:
 
 Starter.php
 
 ```php
 
 namespace models;
-use lib\Core;
-use PDO;
 
 class Starter {
 
@@ -166,12 +164,10 @@ Example Config.php
 /** 
  * Configuration App
  *
- * @var $config['baseuri'] is only used on slim core for base uri. This was used for override handler not found page
  * @var $config['displayErrorDetails'] to display error details on slim
  * @var $config['addContentLengthHeader'] to set the Content-Length header which makes Slim behave more predictably
  * 
  */
-$config['baseuri']                  = 'http://localhost:1337/iSlim3/src/public';
 $config['displayErrorDetails']      = true;
 $config['addContentLengthHeader']   = false;
 
